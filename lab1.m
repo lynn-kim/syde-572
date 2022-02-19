@@ -1,4 +1,7 @@
 % Note: to plot the equiprobabilty contour, we need eigenvalues
+% Current implementation for the equiprobabilty contours is currently being
+% hard coded. Depending on what he's looking for, we may have to switch to
+% a dynamic version. For now, it'll just be hard coded
 
 % gen Class A Data %
 N_a = 200;
@@ -6,6 +9,11 @@ mean_a = [5 10];
 covar_a = [8 0; 0 4];
 class_a_data = gen_data(N_a, mean_a, covar_a);
 eigenvalue_a = eig(covar_a);
+[V_a, D_a] = eig(covar_a); 
+% The columns of V are the eigenvectors 
+% The diagonal of D contains the eigenvalues
+% The columns of V are the eigenvectrs associated with each column in D
+% (eigenvalue)
 
 % gen Class B Data %
 N_b = 200;
@@ -13,6 +21,7 @@ mean_b = [10 15];
 covar_b = [8 0; 0 4];
 class_b_data = gen_data(N_b, mean_b, covar_b);
 eigenvalue_b = eig(covar_b);
+[V_b, D_b] = eig(covar_b);
 
 % gen Class C Data %
 N_c = 100;
@@ -20,6 +29,7 @@ mean_c = [5 10];
 covar_c = [8 4; 4 40];
 class_c_data = gen_data(N_c, mean_c, covar_c);
 eigenvalue_c = eig(covar_c);
+[V_c, D_c] = eig(covar_c)
 
 % gen Class D Data %
 N_d = 200;
@@ -27,6 +37,7 @@ mean_d = [15 10];
 covar_d = [8 0; 0 8];
 class_d_data = gen_data(N_d, mean_d, covar_d);
 eigenvalue_d = eig(covar_d);
+[V_d, D_d] = eig(covar_d);
 
 % gen Class E Data %
 N_e = 150;
@@ -34,20 +45,41 @@ mean_e = [10 5];
 covar_e = [10 -5; -5 20];
 class_e_data = gen_data(N_e, mean_e, covar_e);
 eigenvalue_e = eig(covar_e);
+[V_e, D_e] = eig(covar_e)
+
+% How each value for the ellipse is calcualted:
+% function plot_ellipse(x,y,theta,a,b,color)
+% x: the x point of the mean
+% y: the y point of the mean
+% theta: the angle between the major axis and the horizontal axis. 
+%         Look at D_x to find the larger , and note the column that its in
+%         then look at V_x and locate the same column value
+%         take the arctan of V_x(2,2) / V_x(2,1) (because arctan(y/x) gives 
+%         you the angle between the two points, and set that as theta
+% a: the major axis length, which is the square root of the larger eigenvalue
+% b: the minor axis length, which is the square root of the smaller eigenvalue
+% color: i just chose black
 
 figure
 scatter(class_a_data(:,1), class_a_data(:,2))
 hold on
 scatter(class_b_data(:,1), class_b_data(:,2))
+plot_ellipse(mean_a(1), mean_a(2), 0, sqrt(covar_a(1,1)), sqrt(covar_a(2,2)), 'black')
+plot_ellipse(mean_b(1), mean_b(2), 0, sqrt(covar_b(1,1)), sqrt(covar_b(2,2)), 'black')
 xlabel('x');
 ylabel('y');
-title('Case 1')
+title('Case 1');
+legend('Class A','Class B');
 
 figure
 scatter(class_c_data(:,1), class_c_data(:,2))
 hold on
 scatter(class_d_data(:,1), class_d_data(:,2))
 scatter(class_e_data(:,1), class_e_data(:,2))
+plot_ellipse(mean_c(1), mean_c(2), atan(V_c(2,2) / V_c(1,2)), sqrt(covar_c(2,2)), sqrt(covar_c(1,1)), 'black')
+plot_ellipse(mean_d(1), mean_d(2), 0, sqrt(covar_d(1,1)), sqrt(covar_d(2,2)), 'black')
+plot_ellipse(mean_e(1), mean_e(2), atan(V_e(2,2) / V_e(1,2)), sqrt(covar_e(2,2)), sqrt(covar_e(1,1)), 'black')
 xlabel('x');
 ylabel('y');
-title('Case 2')
+title('Case 2');
+legend('Class C','Class D', 'Class E');
