@@ -23,13 +23,16 @@ class_b_data = gen_data(N_b, mean_b, covar_b);
 eigenvalue_b = eig(covar_b);
 [V_b, D_b] = eig(covar_b);
 
+% GED functions
+ged_classifier(mean_a', covar_a, mean_b', covar_b);
+
 % gen Class C Data %
 N_c = 100;
 mean_c = [5 10];
 covar_c = [8 4; 4 40];
 class_c_data = gen_data(N_c, mean_c, covar_c);
 eigenvalue_c = eig(covar_c);
-[V_c, D_c] = eig(covar_c)
+[V_c, D_c] = eig(covar_c);
 
 % gen Class D Data %
 N_d = 200;
@@ -45,7 +48,7 @@ mean_e = [10 5];
 covar_e = [10 -5; -5 20];
 class_e_data = gen_data(N_e, mean_e, covar_e);
 eigenvalue_e = eig(covar_e);
-[V_e, D_e] = eig(covar_e)
+[V_e, D_e] = eig(covar_e);
 
 % How each value for the ellipse is calcualted:
 % function plot_ellipse(x,y,theta,a,b,color)
@@ -60,7 +63,7 @@ eigenvalue_e = eig(covar_e);
 % b: the minor axis length, which is the square root of the smaller eigenvalue
 % color: i just chose black
 
-figure
+
 scatter(class_a_data(:,1), class_a_data(:,2))
 hold on
 scatter(class_b_data(:,1), class_b_data(:,2))
