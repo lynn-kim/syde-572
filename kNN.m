@@ -24,23 +24,14 @@ function [class] = kNN(k, point, class_data_1, class_data_2, class_data_3)
     min_k_2 = zeros(k, 2);
     
     % find k nearest neighbour coords
-    for i=1: k
-        [minimum_1, index_1] = min(distances_1);
-        min_k_1(i, 1) = class_data_1(index_1, 1);
-        min_k_1(i, 2) = class_data_1(index_1, 2);
-        distances_1(index_1) = inf;
-    end
+    [min_k_1, distances_1] = knn_coords(k, class_data_1, distances_1, min_k_1);
+    [min_k_2, distances_2] = knn_coords(k, class_data_2, distances_2, min_k_2);
 
-    for i=1: k
-        [minimum_2, index_2] = min(distances_2);
-        min_k_2(i, 1) = class_data_2(index_2, 1);
-        min_k_2(i, 2) = class_data_2(index_2, 2);
-        distances_2(index_2) = inf;
-    end
-
-    % calculate new means
-    
-    
+    % calculate new means and distance
+    mean_1 = [0;0];
+    mean_2 = [0;0];
+    mean_dist_1 = knn_mean_dist(k, point, mean_1, min_k_1);
+    mean_dist_2 = knn_mean_dist(k, point, mean_2, min_k_2);
     
     % Case 2
     % if class 3 exists
@@ -54,17 +45,36 @@ function [class] = kNN(k, point, class_data_1, class_data_2, class_data_3)
         end
         
         min_k_3 = zeros(k, 2);
-
-        for i=1: k
-            [minimum_3, index_3] = min(distances_3);
-            min_k_3(i, 1) = class_data_3(index_3, 1);
-            min_k_3(i, 2) = class_data_3(index_3, 2);
-            distances_3(index_3) = inf;
+        [min_k_3, distances_3] = knn_coords(k, class_data_3, distances_3, min_k_3);
+        mean_3 = [0;0];
+        mean_dist_3 = knn_mean_dist(k, point, mean_3, min_k_3);
+        
+        min_distances = [min(mean_dist_1), min(mean_dist_2), min(mean_dist_3)];
+        if((min(min_distances) == min(mean_dist_1)) && (min(mean_dist_1) == min(mean_dist_2)))
+            class = 0;
+        elseif((min(min_distances) == min(mean_dist_1)) && (min(mean_dist_1) == min(mean_dist_3)))
+            class = 0;
+        elseif((min(min_distances) == min(mean_dist_2)) && (min(mean_dist_2) == min(mean_dist_3)))
+            class = 0;
+        elseif((min(mean_dist_1) == min(mean_dist_2)) && (min(mean_dist_2) == min(mean_dist_3)))
+            class = 0;
+        elseif min(min_distances) == min(mean_dist_1)
+            class = 1;
+        elseif min(min_distances) == min(mean_dist_2)
+            class = 2;
+        elseif min(min_distances) == min(mean_dist_3)
+            class = 3;
         end
-        
-        
     
     else
+        min_distances = [min(mean_dist_1), min(mean_dist_2)];
+        if min(mean_dist_1) == min(distances_2)
+            class = 0;
+        elseif min(min_distances) == min(mean_dist_1)
+            class = 1;
+        elseif min(min_distances) == min(mean_dist_2)
+            class = 2;
+        end
     end
 
 end

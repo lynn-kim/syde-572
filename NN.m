@@ -34,14 +34,8 @@ function [ class ] = NN(point, class_data_1, class_data_2, class_data_3)
             class = 0;
         elseif((min(min_distances) == min(distances_1)) && (min(distances_1) == min(distances_3)))
             class = 0;
-    %     elseif((min(min_distances) == distances_2) && (distances_2 == distances_1))
-    %         class = 0;
         elseif((min(min_distances) == min(distances_2)) && (min(distances_2) == min(distances_3)))
             class = 0;
-    %     elseif((min(min_distances) == distances_3) && (distances_3 == distances_1))
-    %         class = 0;
-    %     elseif((min(min_distances) == distances_3) && (distances_3 == distances_2))
-    %         class = 0;
         elseif((min(distances_1) == min(distances_2)) && (min(distances_2) == min(distances_3)))
             class = 0;
         elseif min(min_distances) == min(distances_1)
