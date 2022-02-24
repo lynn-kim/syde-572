@@ -106,9 +106,9 @@ end
 AB_GED = zeros(size(X,1), size(Y,1));
 CDE_GED = zeros(size(X,1), size(Y,1));
 
-for i=1:length(x1)
-    for j=1:length(x2)
-        x = [x1(i); x2(j)];
+for i=1:size(X, 1)
+    for j=1:size(Y, 2)
+        x = [X(i,j); Y(i,j)];
         AB_GED(i,j) = ged_classifier(x, mean_a', covar_a, mean_b', covar_b);
         CDE_GED(i,j) = ged_classifier(x, mean_c', covar_c, mean_d', covar_d,mean_e', covar_e);
     end
@@ -142,7 +142,7 @@ contour(X,Y,MED1,'red');
 hold on
 
 % Plot GED contour for class A/B
-contour(Y,X,AB_GED,'blue','LineWidth',2);
+contour(X,Y,AB_GED,'blue','LineWidth',2);
 hold on
 
 % Plot MAP contour for class A/B
@@ -167,7 +167,7 @@ contour(X,Y,MED2, "red");
 hold on
 
 % Plot GED contour for class C/D/E
-contour(Y,X, CDE_GED, "blue");
+contour(X,Y,CDE_GED, "blue");
 hold on
 
 % Plot MAP contour for class C/D/E
@@ -281,3 +281,12 @@ ylabel('y');
 title('kNN Classification Case 2');
 legend('Decision Boundaries', 'Class C','Class D', 'Class E');
 set(gca, 'YDir', 'normal')
+
+% Error Analysis
+
+% GED:
+confusion_matrix_ged_1 = ged_error(class_a_data, mean_a, covar_a, class_b_data, mean_b, covar_b);
+error_ged_1 = experimental_error(confusion_matrix_ged_1);
+
+confusion_matrix_ged_2 = ged_error(class_c_data, mean_c, covar_c, class_d_data, mean_d, covar_d, class_e_data, mean_e, covar_e);
+error_ged_2 = experimental_error(confusion_matrix_ged_2);
