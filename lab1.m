@@ -67,8 +67,42 @@ x1 = [-5:0.1:25];
 x2 = [-5:0.1:25];
 [X,Y] = meshgrid(x1, x2);
 
+% Compute MED decision boundaries
 
-% Run GED Classification
+% MED Case 1
+AB_MED = med_classifier(X, Y, mean_a, mean_b);
+MED1 = zeros(size(X, 1), size(Y, 2));
+
+% Classify points
+for i=1:size(X,1)
+    for j=1:size(Y,2)
+        if AB_MED(i,j) >= 0 
+            MED1(i,j) = 1;
+        elseif AB_MED(i,j) <=0 
+            MED1(i,j) = 2; 
+        end
+    end
+end
+
+% MED Case 2
+CD_MED = med_classifier(X, Y, mean_c, mean_d);
+EC_MED = med_classifier(X, Y, mean_e, mean_c);
+DE_MED = med_classifier(X, Y, mean_d, mean_e);
+
+% Classify points
+MED2 = zeros(size(X, 1), size(Y, 2));
+for i=1:size(X, 1)
+    for j=1:size(Y, 2)
+        if CD_MED(i,j) >= 0 && DE_MED(i,j) <= 0
+            MED2(i,j) = 1;
+        elseif CD_MED(i,j) <= 0 && EC_MED(i,j) >= 0
+            MED2(i,j) = 2;
+        elseif DE_MED(i,j) >= 0 && EC_MED(i,j) <= 0
+            MED2(i,j) = 3;
+        end
+    end
+end
+
 AB_GED = zeros(size(X,1), size(Y,1));
 CDE_GED = zeros(size(X,1), size(Y,1));
 
@@ -82,7 +116,38 @@ end
 
 
 figure
+% Plot MED contour for class A/B
+contour(Y,X,MED1);
+hold on
 
+scatter(class_a_data(:,1), class_a_data(:,2))
+hold on
+scatter(class_b_data(:,1), class_b_data(:,2))
+plot_ellipse(mean_a(1), mean_a(2), 0, sqrt(covar_a(1,1)), sqrt(covar_a(2,2)), 'black')
+plot_ellipse(mean_b(1), mean_b(2), 0, sqrt(covar_b(1,1)), sqrt(covar_b(2,2)), 'black')
+xlabel('x');
+ylabel('y');
+title('Case 1');
+legend('Decision Boundaries', 'Class A','Class B');
+
+figure
+% Plot GED contour for class C/D/E
+contour(Y,X,MED2);
+hold on
+
+scatter(class_c_data(:,1), class_c_data(:,2))
+hold on
+scatter(class_d_data(:,1), class_d_data(:,2))
+scatter(class_e_data(:,1), class_e_data(:,2))
+plot_ellipse(mean_c(1), mean_c(2), atan(V_c(2,2) / V_c(1,2)), sqrt(covar_c(2,2)), sqrt(covar_c(1,1)), 'black')
+plot_ellipse(mean_d(1), mean_d(2), 0, sqrt(covar_d(1,1)), sqrt(covar_d(2,2)), 'black')
+plot_ellipse(mean_e(1), mean_e(2), atan(V_e(2,2) / V_e(1,2)), sqrt(covar_e(2,2)), sqrt(covar_e(1,1)), 'black')
+xlabel('x');
+ylabel('y');
+title('Case 2');
+legend('Decision Boundaries','Class C','Class D', 'Class E');
+
+figure
 % Plot GED contour for class A/B
 contour(Y,X,AB_GED);
 hold on
