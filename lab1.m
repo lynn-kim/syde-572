@@ -115,73 +115,6 @@ for i=1:length(x1)
 end
 
 
-figure
-% Plot MED contour for class A/B
-contour(X,Y,MED1);
-hold on
-
-scatter(class_a_data(:,1), class_a_data(:,2))
-hold on
-scatter(class_b_data(:,1), class_b_data(:,2))
-plot_ellipse(mean_a(1), mean_a(2), 0, sqrt(covar_a(1,1)), sqrt(covar_a(2,2)), 'black')
-plot_ellipse(mean_b(1), mean_b(2), 0, sqrt(covar_b(1,1)), sqrt(covar_b(2,2)), 'black')
-xlabel('x');
-ylabel('y');
-title('MED Classification Case 1');
-legend('Decision Boundaries', 'Class A','Class B');
-
-figure
-% Plot MED contour for class C/D/E
-contour(X,Y,MED2);
-hold on
-
-scatter(class_c_data(:,1), class_c_data(:,2))
-hold on
-scatter(class_d_data(:,1), class_d_data(:,2))
-scatter(class_e_data(:,1), class_e_data(:,2))
-plot_ellipse(mean_c(1), mean_c(2), atan(V_c(2,2) / V_c(1,2)), sqrt(covar_c(2,2)), sqrt(covar_c(1,1)), 'black')
-plot_ellipse(mean_d(1), mean_d(2), 0, sqrt(covar_d(1,1)), sqrt(covar_d(2,2)), 'black')
-plot_ellipse(mean_e(1), mean_e(2), atan(V_e(2,2) / V_e(1,2)), sqrt(covar_e(2,2)), sqrt(covar_e(1,1)), 'black')
-xlabel('x');
-ylabel('y');
-title('MED Classification Case 2');
-legend('Decision Boundaries','Class C','Class D', 'Class E');
-
-figure
-% Plot GED contour for class A/B
-contour(Y,X,AB_GED);
-hold on
-
-scatter(class_a_data(:,1), class_a_data(:,2))
-hold on
-scatter(class_b_data(:,1), class_b_data(:,2))
-plot_ellipse(mean_a(1), mean_a(2), 0, sqrt(covar_a(1,1)), sqrt(covar_a(2,2)), 'black')
-plot_ellipse(mean_b(1), mean_b(2), 0, sqrt(covar_b(1,1)), sqrt(covar_b(2,2)), 'black')
-xlabel('x');
-ylabel('y');
-title('GED Classification Case 1');
-legend('Decision Boundaries', 'Class A','Class B');
-
-
-
-figure
-
-% Plot GED contour for class C/D/E
-contour(Y,X, CDE_GED);
-hold on
-
-scatter(class_c_data(:,1), class_c_data(:,2))
-hold on
-scatter(class_d_data(:,1), class_d_data(:,2))
-scatter(class_e_data(:,1), class_e_data(:,2))
-plot_ellipse(mean_c(1), mean_c(2), atan(V_c(2,2) / V_c(1,2)), sqrt(covar_c(2,2)), sqrt(covar_c(1,1)), 'black')
-plot_ellipse(mean_d(1), mean_d(2), 0, sqrt(covar_d(1,1)), sqrt(covar_d(2,2)), 'black')
-plot_ellipse(mean_e(1), mean_e(2), atan(V_e(2,2) / V_e(1,2)), sqrt(covar_e(2,2)), sqrt(covar_e(1,1)), 'black')
-xlabel('x');
-ylabel('y');
-title('GED Classification Case 2');
-legend('Decision Boundaries','Class C','Class D', 'Class E');
-
 % Run MAP Classification
 AB_MAP = map_classifier(mean_a, mean_b, covar_a, covar_b, N_a, N_b, X, Y);
 CDE_MAP = zeros(size(X,1), size(Y,1));
@@ -201,9 +134,19 @@ for i = 1:size(X, 1)
     end
 end
 
+
+
 figure
+% Plot MED contour for class A/B
+contour(X,Y,MED1,'red');
+hold on
+
+% Plot GED contour for class A/B
+contour(Y,X,AB_GED,'blue','LineWidth',2);
+hold on
+
 % Plot MAP contour for class A/B
-contour(X,Y,AB_MAP);
+contour(X,Y,AB_MAP,'green');
 hold on
 
 scatter(class_a_data(:,1), class_a_data(:,2))
@@ -213,12 +156,22 @@ plot_ellipse(mean_a(1), mean_a(2), 0, sqrt(covar_a(1,1)), sqrt(covar_a(2,2)), 'b
 plot_ellipse(mean_b(1), mean_b(2), 0, sqrt(covar_b(1,1)), sqrt(covar_b(2,2)), 'black')
 xlabel('x');
 ylabel('y');
-title('MAP Classification Case 1');
-legend('Decision Boundaries', 'Class A','Class B');
+title('Classification for Class A/B');
+legend('MED Decision Boundary', 'MICD Decision Boundary','MAP Decision Boundary', 'Class A','Class B');
+
+
 
 figure
+% Plot MED contour for class C/D/E
+contour(X,Y,MED2, "red");
+hold on
+
+% Plot GED contour for class C/D/E
+contour(Y,X, CDE_GED, "blue");
+hold on
+
 % Plot MAP contour for class C/D/E
-contour(X, Y, CDE_MAP);
+contour(X, Y, CDE_MAP, "green");
 hold on
 
 scatter(class_c_data(:,1), class_c_data(:,2))
@@ -230,8 +183,10 @@ plot_ellipse(mean_d(1), mean_d(2), 0, sqrt(covar_d(1,1)), sqrt(covar_d(2,2)), 'b
 plot_ellipse(mean_e(1), mean_e(2), atan(V_e(2,2) / V_e(1,2)), sqrt(covar_e(2,2)), sqrt(covar_e(1,1)), 'black')
 xlabel('x');
 ylabel('y');
-title('MAP Classification Case 2');
-legend('Decision Boundaries','Class C','Class D', 'Class E');
+title('Classification for Class C/D/E');
+legend('MED Decision Boundary', 'MICD Decision Boundary','MAP Decision Boundary', 'Class C','Class D', 'Class E');
+
+
 
 [XNN,YNN] = meshgrid(x1, x2);
 AB_NN = zeros(size(XNN,1), size(YNN,1));
