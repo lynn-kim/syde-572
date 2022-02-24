@@ -127,7 +127,7 @@ plot_ellipse(mean_a(1), mean_a(2), 0, sqrt(covar_a(1,1)), sqrt(covar_a(2,2)), 'b
 plot_ellipse(mean_b(1), mean_b(2), 0, sqrt(covar_b(1,1)), sqrt(covar_b(2,2)), 'black')
 xlabel('x');
 ylabel('y');
-title('Case 1');
+title('MED Classification Case 1');
 legend('Decision Boundaries', 'Class A','Class B');
 
 figure
@@ -144,7 +144,7 @@ plot_ellipse(mean_d(1), mean_d(2), 0, sqrt(covar_d(1,1)), sqrt(covar_d(2,2)), 'b
 plot_ellipse(mean_e(1), mean_e(2), atan(V_e(2,2) / V_e(1,2)), sqrt(covar_e(2,2)), sqrt(covar_e(1,1)), 'black')
 xlabel('x');
 ylabel('y');
-title('Case 2');
+title('MED Classification Case 2');
 legend('Decision Boundaries','Class C','Class D', 'Class E');
 
 figure
