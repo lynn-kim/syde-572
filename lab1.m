@@ -94,9 +94,9 @@ MED2 = zeros(size(X, 1), size(Y, 2));
 for i=1:size(X, 1)
     for j=1:size(Y, 2)
         if CD_MED(i,j) >= 0 && DE_MED(i,j) <= 0
-            MED2(i,j) = 1;
-        elseif CD_MED(i,j) <= 0 && EC_MED(i,j) >= 0
             MED2(i,j) = 2;
+        elseif CD_MED(i,j) <= 0 && EC_MED(i,j) >= 0
+            MED2(i,j) = 1;
         elseif DE_MED(i,j) >= 0 && EC_MED(i,j) <= 0
             MED2(i,j) = 3;
         end
@@ -117,7 +117,7 @@ end
 
 figure
 % Plot MED contour for class A/B
-contour(Y,X,MED1);
+contour(X,Y,MED1);
 hold on
 
 scatter(class_a_data(:,1), class_a_data(:,2))
@@ -131,8 +131,8 @@ title('MED Classification Case 1');
 legend('Decision Boundaries', 'Class A','Class B');
 
 figure
-% Plot GED contour for class C/D/E
-contour(Y,X,MED2);
+% Plot MED contour for class C/D/E
+contour(X,Y,MED2);
 hold on
 
 scatter(class_c_data(:,1), class_c_data(:,2))
