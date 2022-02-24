@@ -1,6 +1,6 @@
 function [class] = kNN(k, point, class_data_1, class_data_2, class_data_3)
 
-    class = 0
+    class = 0;
     length_var_1 = length(class_data_1);
     length_var_2 = length(class_data_2);
     
