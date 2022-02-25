@@ -1,5 +1,5 @@
 function label = classify_pattern(cd, de, ec)
-% Helper function to classify pattern and assign to appropriate class label
+% Helper function to classify pattern using MED and assign to appropriate class label
 if cd <= 0 && ec >= 0
     % belongs to class C
     label = 1;
