@@ -290,3 +290,10 @@ error_ged_1 = experimental_error(confusion_matrix_ged_1);
 
 confusion_matrix_ged_2 = ged_error(class_c_data, mean_c, covar_c, class_d_data, mean_d, covar_d, class_e_data, mean_e, covar_e);
 error_ged_2 = experimental_error(confusion_matrix_ged_2);
+
+%MAP
+confusion_matrix_map_1 = map_error(class_a_data, mean_a, covar_a, N_a, class_b_data, mean_b, covar_b, N_b);
+error_map_1 = experimental_error(confusion_matrix_map_1);
+
+confusion_matrix_map_2 = map_error(class_c_data, mean_c, covar_c, N_c, class_d_data, mean_d, covar_d, N_d, class_e_data, mean_e, covar_e, N_e);
+error_map_2 = experimental_error(confusion_matrix_map_2);
