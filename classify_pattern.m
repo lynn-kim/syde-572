@@ -10,4 +10,3 @@ elseif de >= 0 && ec <= 0
     % belongs to class E
     label = 3;
 end
-

@@ -84,11 +84,3 @@ end
 
 disp('Confusion Matrix for C, D, and E:')
 disp(confusion_matrix_med_2)
-
-
-
-
-
-
-
-    
