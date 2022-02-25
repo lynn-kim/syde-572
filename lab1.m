@@ -70,7 +70,7 @@ x2 = [-5:0.1:25];
 % Compute MED decision boundaries
 
 % MED Case 1
-AB_MED = med_classifier(X, Y, mean_a, mean_b);
+AB_MED = med_classifier(mean_a, mean_b, X, Y);
 MED1 = zeros(size(X, 1), size(Y, 2));
 
 % Classify points
@@ -79,15 +79,15 @@ for i=1:size(X,1)
         if AB_MED(i,j) >= 0 
             MED1(i,j) = 1;
         elseif AB_MED(i,j) <=0 
-            MED1(i,j) = 2; 
+            MED1(i,j) = 2;
         end
     end
 end
 
 % MED Case 2
-CD_MED = med_classifier(X, Y, mean_c, mean_d);
-EC_MED = med_classifier(X, Y, mean_e, mean_c);
-DE_MED = med_classifier(X, Y, mean_d, mean_e);
+CD_MED = med_classifier(mean_c, mean_d, X, Y);
+EC_MED = med_classifier(mean_e, mean_c, X, Y);
+DE_MED = med_classifier(mean_d, mean_e, X, Y);
 
 % Classify points
 MED2 = zeros(size(X, 1), size(Y, 2));
@@ -283,6 +283,15 @@ legend('Decision Boundaries', 'Class C','Class D', 'Class E');
 set(gca, 'YDir', 'normal')
 
 % Error Analysis
+
+% MED:
+med_error;
+error_med_1 = experimental_error(confusion_matrix_med_1);
+disp('MED Case 1 Experimental Error Rate:');
+disp(error_med_1);
+error_med_2 = experimental_error(confusion_matrix_med_2);
+disp('MED Case 2 Experimental Error Rate:');
+disp(error_med_2);
 
 % GED:
 confusion_matrix_ged_1 = ged_error(class_a_data, mean_a, covar_a, class_b_data, mean_b, covar_b);
