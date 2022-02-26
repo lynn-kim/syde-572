@@ -320,8 +320,8 @@ confusion_matrix_nn_2 = nn_error(CDE_NN, x1, class_c_test_data, class_d_test_dat
 error_nn_2 = experimental_error(confusion_matrix_nn_2);
 
 % KNN
-confusion_matrix_nn_1 = nn_error(AB_KNN, x1, class_a_test_data, class_b_test_data);
-error_nn_1 = experimental_error(confusion_matrix_nn_1);
+confusion_matrix_knn_1 = nn_error(AB_KNN, x1, class_a_test_data, class_b_test_data);
+error_knn_1 = experimental_error(confusion_matrix_knn_1);
 
-confusion_matrix_nn_2 = nn_error(CDE_KNN, x1, class_c_test_data, class_d_test_data, class_e_test_data);
-error_nn_2 = experimental_error(confusion_matrix_nn_2);
+confusion_matrix_knn_2 = nn_error(CDE_KNN, x1, class_c_test_data, class_d_test_data, class_e_test_data);
+error_knn_2 = experimental_error(confusion_matrix_knn_2);
