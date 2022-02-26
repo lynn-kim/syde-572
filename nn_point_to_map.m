@@ -8,5 +8,5 @@ function [ coord_i, coord_j ] = nn_point_to_map(coordinate, x1)
     rounded_y = interp1(x1, x1, coordinate(1, 2), 'nearest');
 
     coord_i = 10*rounded_x + 501;
-    coord_j = 10*rounded_y + 501; % y = 10x + 51
+    coord_j = 10*rounded_y + 501; % y = 10x + 501
 end
