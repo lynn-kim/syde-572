@@ -1,17 +1,8 @@
 function [ confusion_matrix ] = nn_error(classifier, x1, test_dataset_1, test_dataset_2, test_dataset_3)
 
-    % need to figure out the mapping since the grid is bounded by [-5, 25]
-    % for both the x and y axis
     % each x1 and x2 value will map to a certain i and j value. the x1 and
     % x2 value will be in the same domain and range of the test_dataset
-    % values
-    % - 5 maps to 1, 25 maps to 301. (0 should be 51) Determine an equation for the
-    % coordinates to give you i and j , and round for necessary cases
-    % Access that point with the i and j values returned from the
-    % nn_point_to_map() function in the classifier, and see what class
-    % value it is
-    % if it matches the current class, set it to the corresponding
-    % confusion matrix value
+    % values. Use an equation to map the coordinates to i and j, and round
     
     % Initialize
     confusion_matrix = zeros(1,1);
@@ -20,7 +11,11 @@ function [ confusion_matrix ] = nn_error(classifier, x1, test_dataset_1, test_da
         confusion_matrix = zeros(3,3);
         for a=1:length(test_dataset_1)
             point = [test_dataset_1(a, 1), test_dataset_1(a, 2)];
+
+            % Grid coordinate to i,j mapping
             [i, j] = nn_point_to_map(point, x1);
+            % Convert the double values to int so they're able to be used
+            % when calling matrices
             i = int16(i);
             j = int16(j);
 

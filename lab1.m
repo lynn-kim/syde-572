@@ -8,6 +8,7 @@ N_a = 200;
 mean_a = [5 10];
 covar_a = [8 0; 0 4];
 class_a_data = gen_data(N_a, mean_a, covar_a);
+class_a_test_data = gen_data(N_a, mean_a, covar_a);
 eigenvalue_a = eig(covar_a);
 [V_a, D_a] = eig(covar_a); 
 % The columns of V are the eigenvectors 
@@ -20,6 +21,7 @@ N_b = 200;
 mean_b = [10 15];
 covar_b = [8 0; 0 4];
 class_b_data = gen_data(N_b, mean_b, covar_b);
+class_b_test_data = gen_data(N_b, mean_b, covar_b);
 eigenvalue_b = eig(covar_b);
 [V_b, D_b] = eig(covar_b);
 
@@ -28,6 +30,7 @@ N_c = 100;
 mean_c = [5 10];
 covar_c = [8 4; 4 40];
 class_c_data = gen_data(N_c, mean_c, covar_c);
+class_c_test_data = gen_data(N_c, mean_c, covar_c);
 eigenvalue_c = eig(covar_c);
 [V_c, D_c] = eig(covar_c);
 
@@ -36,6 +39,7 @@ N_d = 200;
 mean_d = [15 10];
 covar_d = [8 0; 0 8];
 class_d_data = gen_data(N_d, mean_d, covar_d);
+class_d_test_data = gen_data(N_d, mean_d, covar_d);
 eigenvalue_d = eig(covar_d);
 [V_d, D_d] = eig(covar_d);
 
@@ -44,6 +48,7 @@ N_e = 150;
 mean_e = [10 5];
 covar_e = [10 -5; -5 20];
 class_e_data = gen_data(N_e, mean_e, covar_e);
+class_e_test_data = gen_data(N_e, mean_e, covar_e);
 eigenvalue_e = eig(covar_e);
 [V_e, D_e] = eig(covar_e);
 
@@ -63,8 +68,8 @@ eigenvalue_e = eig(covar_e);
 
 % 2D grid:
 
-x1 = [-5:0.1:25];
-x2 = [-5:0.1:25];
+x1 = [-50:0.1:50];
+x2 = [-50:0.1:50];
 [X,Y] = meshgrid(x1, x2);
 
 % Compute MED decision boundaries
@@ -306,3 +311,10 @@ error_map_1 = experimental_error(confusion_matrix_map_1);
 
 confusion_matrix_map_2 = map_error(class_c_data, mean_c, covar_c, N_c, class_d_data, mean_d, covar_d, N_d, class_e_data, mean_e, covar_e, N_e);
 error_map_2 = experimental_error(confusion_matrix_map_2);
+
+% NN
+confusion_matrix_nn_1 = nn_error(AB_NN, x1, class_a_test_data, class_b_test_data);
+error_nn_1 = experimental_error(confusion_matrix_nn_1);
+
+confusion_matrix_nn_2 = nn_error(CDE_NN, x1, class_c_test_data, class_d_test_data, class_e_test_data);
+error_nn_2 = experimental_error(confusion_matrix_nn_2);
