@@ -217,7 +217,7 @@ plot_ellipse(mean_a(1), mean_a(2), 0, sqrt(covar_a(1,1)), sqrt(covar_a(2,2)), 'b
 plot_ellipse(mean_b(1), mean_b(2), 0, sqrt(covar_b(1,1)), sqrt(covar_b(2,2)), 'black')
 xlabel('x');
 ylabel('y');
-title('NN Classification Case 1');
+title('Nearest Neighbour Classification for Class A/B');
 legend('Decision Boundaries', 'Class A','Class B');
 set(gca, 'YDir', 'normal')
 
@@ -236,7 +236,7 @@ plot_ellipse(mean_d(1), mean_d(2), 0, sqrt(covar_d(1,1)), sqrt(covar_d(2,2)), 'b
 plot_ellipse(mean_e(1), mean_e(2), atan(V_e(2,2) / V_e(1,2)), sqrt(covar_e(2,2)), sqrt(covar_e(1,1)), 'black')
 xlabel('x');
 ylabel('y');
-title('NN Classification Case 2');
+title('Nearest Neighbour Classification for Class C/D/E');
 legend('Decision Boundaries', 'Class C','Class D', 'Class E');
 set(gca, 'YDir', 'normal')
 
@@ -265,7 +265,7 @@ plot_ellipse(mean_a(1), mean_a(2), 0, sqrt(covar_a(1,1)), sqrt(covar_a(2,2)), 'b
 plot_ellipse(mean_b(1), mean_b(2), 0, sqrt(covar_b(1,1)), sqrt(covar_b(2,2)), 'black')
 xlabel('x');
 ylabel('y');
-title('kNN Classification Case 1');
+title('k-Nearest Neighbours Classification for Class A/B');
 legend('Decision Boundaries', 'Class A','Class B');
 set(gca, 'YDir', 'normal')
 
@@ -283,7 +283,7 @@ plot_ellipse(mean_d(1), mean_d(2), 0, sqrt(covar_d(1,1)), sqrt(covar_d(2,2)), 'b
 plot_ellipse(mean_e(1), mean_e(2), atan(V_e(2,2) / V_e(1,2)), sqrt(covar_e(2,2)), sqrt(covar_e(1,1)), 'black')
 xlabel('x');
 ylabel('y');
-title('kNN Classification Case 2');
+title('k-Nearest Neighbours Classification for Class C/D/E');
 legend('Decision Boundaries', 'Class C','Class D', 'Class E');
 set(gca, 'YDir', 'normal')
 
@@ -299,29 +299,29 @@ disp('MED Case 2 Experimental Error Rate:');
 disp(error_med_2);
 
 % GED:
-confusion_matrix_ged_1 = ged_error(class_a_data, mean_a, covar_a, class_b_data, mean_b, covar_b);
-error_ged_1 = experimental_error(confusion_matrix_ged_1);
+confusion_matrix_ged_1 = ged_error(class_a_data, mean_a, covar_a, class_b_data, mean_b, covar_b)
+error_ged_1 = experimental_error(confusion_matrix_ged_1)
 
-confusion_matrix_ged_2 = ged_error(class_c_data, mean_c, covar_c, class_d_data, mean_d, covar_d, class_e_data, mean_e, covar_e);
-error_ged_2 = experimental_error(confusion_matrix_ged_2);
+confusion_matrix_ged_2 = ged_error(class_c_data, mean_c, covar_c, class_d_data, mean_d, covar_d, class_e_data, mean_e, covar_e)
+error_ged_2 = experimental_error(confusion_matrix_ged_2)
 
 %MAP
-confusion_matrix_map_1 = map_error(class_a_data, mean_a, covar_a, N_a, class_b_data, mean_b, covar_b, N_b);
-error_map_1 = experimental_error(confusion_matrix_map_1);
+confusion_matrix_map_1 = map_error(class_a_data, mean_a, covar_a, N_a, class_b_data, mean_b, covar_b, N_b)
+error_map_1 = experimental_error(confusion_matrix_map_1)
 
-confusion_matrix_map_2 = map_error(class_c_data, mean_c, covar_c, N_c, class_d_data, mean_d, covar_d, N_d, class_e_data, mean_e, covar_e, N_e);
-error_map_2 = experimental_error(confusion_matrix_map_2);
+confusion_matrix_map_2 = map_error(class_c_data, mean_c, covar_c, N_c, class_d_data, mean_d, covar_d, N_d, class_e_data, mean_e, covar_e, N_e)
+error_map_2 = experimental_error(confusion_matrix_map_2)
 
 % NN
-confusion_matrix_nn_1 = nn_error(AB_NN, x1, class_a_test_data, class_b_test_data);
-error_nn_1 = experimental_error(confusion_matrix_nn_1);
+confusion_matrix_nn_1 = nn_error(AB_NN, x1, class_a_test_data, class_b_test_data)
+error_nn_1 = experimental_error(confusion_matrix_nn_1)
 
-confusion_matrix_nn_2 = nn_error(CDE_NN, x1, class_c_test_data, class_d_test_data, class_e_test_data);
-error_nn_2 = experimental_error(confusion_matrix_nn_2);
+confusion_matrix_nn_2 = nn_error(CDE_NN, x1, class_c_test_data, class_d_test_data, class_e_test_data)
+error_nn_2 = experimental_error(confusion_matrix_nn_2)
 
 % KNN
-confusion_matrix_knn_1 = nn_error(AB_KNN, x1, class_a_test_data, class_b_test_data);
-error_knn_1 = experimental_error(confusion_matrix_knn_1);
+confusion_matrix_knn_1 = nn_error(AB_KNN, x1, class_a_test_data, class_b_test_data)
+error_knn_1 = experimental_error(confusion_matrix_knn_1)
 
-confusion_matrix_knn_2 = nn_error(CDE_KNN, x1, class_c_test_data, class_d_test_data, class_e_test_data);
-error_knn_2 = experimental_error(confusion_matrix_knn_2);
+confusion_matrix_knn_2 = nn_error(CDE_KNN, x1, class_c_test_data, class_d_test_data, class_e_test_data)
+error_knn_2 = experimental_error(confusion_matrix_knn_2)
