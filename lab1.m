@@ -192,7 +192,7 @@ title('Classification for Class C/D/E');
 legend('MED Decision Boundary', 'MICD Decision Boundary','MAP Decision Boundary', 'Class C','Class D', 'Class E');
 
 
-
+% Setting up NN
 [XNN,YNN] = meshgrid(x1, x2);
 AB_NN = zeros(size(XNN,1), size(YNN,1));
 CDE_NN = zeros(size(XNN,1), size(YNN,1));
@@ -205,6 +205,7 @@ for i=1:length(x1)
     end
 end
 
+% NN AB
 figure
 imagesc(x1,x2,AB_NN')
 hold on
@@ -221,6 +222,7 @@ title('Nearest Neighbour Classification for Class A/B');
 legend('Decision Boundaries', 'Class A','Class B');
 set(gca, 'YDir', 'normal')
 
+% NN CDE
 figure
 imagesc(x1,x2,CDE_NN')
 hold on
@@ -230,7 +232,6 @@ scatter(class_c_data(:,1), class_c_data(:,2), 'filled')
 hold on
 scatter(class_d_data(:,1), class_d_data(:,2), 'filled')
 scatter(class_e_data(:,1), class_e_data(:,2), 'filled')
-
 plot_ellipse(mean_c(1), mean_c(2), atan(V_c(2,2) / V_c(1,2)), sqrt(covar_c(2,2)), sqrt(covar_c(1,1)), 'black')
 plot_ellipse(mean_d(1), mean_d(2), 0, sqrt(covar_d(1,1)), sqrt(covar_d(2,2)), 'black')
 plot_ellipse(mean_e(1), mean_e(2), atan(V_e(2,2) / V_e(1,2)), sqrt(covar_e(2,2)), sqrt(covar_e(1,1)), 'black')
@@ -240,6 +241,7 @@ title('Nearest Neighbour Classification for Class C/D/E');
 legend('Decision Boundaries', 'Class C','Class D', 'Class E');
 set(gca, 'YDir', 'normal')
 
+% Setting up KNN
 [XKNN,YKNN] = meshgrid(x1, x2);
 AB_KNN = zeros(size(XKNN,1), size(YKNN,1));
 CDE_KNN = zeros(size(XKNN,1), size(YKNN,1));
@@ -253,6 +255,7 @@ for i=1:length(x1)
     end
 end
 
+% KNN AB
 figure
 imagesc(x1,x2,AB_KNN')
 hold on
@@ -269,6 +272,7 @@ title('k-Nearest Neighbours Classification for Class A/B');
 legend('Decision Boundaries', 'Class A','Class B');
 set(gca, 'YDir', 'normal')
 
+% KNN CDE
 figure
 imagesc(x1,x2,CDE_KNN')
 hold on
@@ -286,6 +290,41 @@ ylabel('y');
 title('k-Nearest Neighbours Classification for Class C/D/E');
 legend('Decision Boundaries', 'Class C','Class D', 'Class E');
 set(gca, 'YDir', 'normal')
+
+%%%%%%
+
+% NN and KNN for AB
+figure
+contour(XNN, YNN, AB_NN', 'r');
+hold on
+contour(XKNN, YKNN, AB_KNN', 'g');
+hold on
+scatter(class_a_data(:,1), class_a_data(:,2), 'filled')
+hold on
+scatter(class_b_data(:,1), class_b_data(:,2), 'filled')
+xlabel('x');
+ylabel('y');
+title('NN & KNN Classification for Class A/B');
+legend('NN Boundaries', 'KNN Boundaries', 'Class A','Class B');
+set(gca, 'YDir', 'normal')
+
+% NN and KNN for CDE
+figure
+contour(XNN, YNN, CDE_NN', 'r');
+hold on
+contour(XKNN, YKNN, CDE_KNN', 'g');
+hold on
+scatter(class_c_data(:,1), class_c_data(:,2), 'filled')
+hold on
+scatter(class_d_data(:,1), class_d_data(:,2), 'filled')
+scatter(class_e_data(:,1), class_e_data(:,2), 'filled')
+xlabel('x');
+ylabel('y');
+title('NN & KNN Classification for Class C/D/E');
+legend('NN Boundaries', 'KNN Boundaries', 'Class C','Class D', 'Class E');
+set(gca, 'YDir', 'normal')
+
+%%%%%%
 
 % Error Analysis
 
