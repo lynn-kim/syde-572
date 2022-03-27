@@ -46,7 +46,7 @@ for i = 1:size(X, 1)
 end
 
 figure
-% Plot MAP contour for class A/B
+% Plot ML contour for classes a,b,c
 contour(X,Y,abc_parametric,'green');
 hold on
 scatter(al(:,1), al(:,2), color='red')
