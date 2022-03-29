@@ -77,6 +77,7 @@ plot(x, normal_dist_a);
 scatter(a, y);
 hold off;
 
+
 % Data set b
 N = length(b);
 x = 0:0.01:max(b(1,:))+2;
@@ -99,6 +100,76 @@ hold off;
 figure(6);
 hold on;
 plot(x, non_param_b_2);
+plot(x, exp_dist_b);
+scatter(b, y);
+hold off;
+
+%% Gaussian & Exponential
+% Dataset a
+
+mu_a_hat = mean(a);
+var_a_hat = var(a);
+
+x = 0:0.01:max(a(1,:))+2;
+
+% data points
+y = zeros(size(a));
+
+% gaussian distribution 
+gaussian_dist_a = normpdf(x, mu_a_hat, sqrt(var_a_hat));
+
+% exponential distribution
+exponential_dist_a = exppdf(x, mu_a_hat);
+
+
+% plot gaussian
+figure(7);
+hold on;
+plot(x, gaussian_dist_a);
+plot(x, normal_dist_a);
+scatter(a, y);
+hold off;
+
+% plot exponential
+figure(8);
+hold on;
+plot(x, exponential_dist_a);
+plot(x, normal_dist_a);
+scatter(a, y);
+hold off;
+
+
+% Dataset b
+
+mu_b_hat = mean(b);
+var_b_hat = var(b);
+
+x = 0:0.01:max(b(1,:))+2;
+
+% data points
+y = zeros(size(b));
+
+
+% gaussian distribution
+gaussian_dist_b = normpdf(x, mu_b_hat, sqrt(var_b_hat));
+
+% exponential distribution
+exponential_dist_b = exppdf(x, mu_b_hat);
+
+
+% plot gaussian
+figure(9);
+hold on;
+plot(x, gaussian_dist_b);
+plot(x, exp_dist_b);
+scatter(b, y);
+hold off;
+
+
+% plot exponential
+figure(10);
+hold on;
+plot(x, exponential_dist_b);
 plot(x, exp_dist_b);
 scatter(b, y);
 hold off;
