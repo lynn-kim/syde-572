@@ -57,3 +57,35 @@ xlabel('x');
 ylabel('y');
 
 
+
+
+% NON-PARAMETRIC ESTIMATION
+h = 1;
+x1 = x_min-1:h:x_max+1;
+y1 = y_min-1:h:y_max+1;
+[X1, Y1] = meshgrid(x1, y1);
+
+res = [h x_min y_min x_max y_max]; % From the parzen file
+
+% Setting up for Parzen
+%%% win = window
+%%% The window function in lab 2 is a Gaussian Window function, with
+%%% variance of 400
+% mean = [0 0];
+mean = [floor((x_max - x_min)/2) floor((y_max - y_min)/2)];
+covar = [400 0; 0 400];
+gaussian_window = mvnpdf(X,mean,covar);
+gaussian_window = reshape(gaussian_window,length(y1),length(x1));
+
+% % https://www.mathworks.com/help/stats/multivariate-normal-distribution.html
+% surf(x1,y1,gaussian_window, 'edgecolor', 'none')
+% caxis([min(gaussian_window(:))-0.5*range(gaussian_window(:)),max(gaussian_window(:))])
+% axis([0 500 0 500 0 5*10^-4])
+% xlabel('x1')
+% ylabel('y1')
+% zlabel('Probability Density')
+
+
+[p_al, x_al, y_al] = parzen(al, res, gaussian_window);
+[p_bl, x_bl, y_bl] = parzen(bl, res, gaussian_window);
+[p_cl, x_cl, y_cl] = parzen(cl, res, gaussian_window);
