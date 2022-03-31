@@ -45,7 +45,7 @@ for i = 1:size(X, 1)
     end
 end
 
-figure
+figure(1)
 % Plot ML contour for classes a,b,c
 contour(X,Y,abc_parametric,'green');
 hold on
@@ -85,7 +85,7 @@ for i = 1:size(X1, 1) -1
     end
 end
 
-figure
+figure(2)
 % Plot ML contour for classes a,b,c
 contour(X1,Y1,abc_non_parametric,'green');
 hold on
@@ -93,5 +93,58 @@ scatter(al(:,1), al(:,2), color='red')
 scatter(bl(:,1), bl(:,2), color='blue')
 scatter(cl(:,1), cl(:,2), color='yellow')
 legend('ML Decision Boundary', 'Class A Data', 'Class B Data', 'Class C Data');
+% SEQUENTIAL DISCRIMINANTS
+
+% Load data
+load('lab2_3.mat');
+
+% Compute discriminant functions, naB, nBa
+[naB, nbA, a_prots, b_prots] = find_sequential_classifiers(a,b,-1);
+
+
+% Mesh grid
+x_min_2 = min([a(:,1); b(:,1)]);
+y_min_2 = min([a(:,2); b(:,2)]);
+x_max_2 = max([a(:,1); b(:,1)]);
+y_max_2 = max([a(:,2); b(:,2)]);
+
+x_2 = x_min_2-1:1:x_max_2+1;
+y_2 = y_min_2-1:1:y_max_2+1;
+
+[X2, Y2] = meshgrid(x_2, y_2);
+sq_disc = zeros(size(X2,1), size(Y2,2));
+
+
+% Classify points (a --> 1, b--> 2)
+for r = 1:size(X2, 1)
+    for c = 1:size(Y2, 2)
+        is_classified = false;
+        j = 1;
+        while ~is_classified && j <= height(a_prots)
+            x = [X2(r,c) Y2(r,c)];
+            discriminant =  med(x, a_prots(j, :), b_prots(j, :));
+            % < 0: a --> 1
+            % > 0: b --> 2
+            if (nbA(j) == 0 && discriminant < 0)
+                is_classified = true;
+                sq_disc(r,c) = 1;
+            elseif (naB(j) == 0 && discriminant > 0)
+                is_classified = true;
+                sq_disc(r,c) = 2;
+            else 
+                j = j + 1;
+            end
+        end
+    end
+end
+
+
+% Plot contour for classes a,b
+figure(3)
+contour(X2,Y2,sq_disc,'green');
+hold on
+scatter(a(:,1), a(:,2), color='red')
+scatter(b(:,1), b(:,2), color='blue')
+legend('Sequential Classifier Decision Boundary', 'Class A Data', 'Class B Data');
 xlabel('x');
 ylabel('y');
