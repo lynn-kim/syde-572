@@ -74,6 +74,6 @@ function [avg_err, min_err, max_err, std_dev_err] = sequential_discriminant_erro
         avg_err(j) = sum(misclassified_count(j,:))/K/total;
         min_err(j) = min(misclassified_count(j,:))/total;
         max_err(j) = max(misclassified_count(j,:))/total;
-        std_dev_err(j) = std(misclassified_count(j,:));
+        std_dev_err(j) = std(misclassified_count(j,:)/total);
     end
 end
