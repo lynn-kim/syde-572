@@ -99,7 +99,7 @@ legend('ML Decision Boundary', 'Class A Data', 'Class B Data', 'Class C Data');
 load('lab2_3.mat');
 
 % Compute discriminant functions, naB, nBa
-[naB, nbA, a_prots, b_prots] = find_sequential_classifiers(a,b,-1);
+[naB, nbA, a_prots, b_prots] = find_sequential_classifiers(a,b,3);
 
 
 % Mesh grid
@@ -122,7 +122,7 @@ for r = 1:size(X2, 1)
         j = 1;
         while ~is_classified && j <= height(a_prots)
             x = [X2(r,c) Y2(r,c)];
-            discriminant =  med(x, a_prots(j, :), b_prots(j, :));
+            discriminant = med(x, a_prots(j, :), b_prots(j, :));
             % < 0: a --> 1
             % > 0: b --> 2
             if (nbA(j) == 0 && discriminant < 0)

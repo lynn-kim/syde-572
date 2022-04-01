@@ -39,8 +39,6 @@ function [naB, nbA, a_prototypes, b_prototypes] = find_sequential_classifiers(cl
         a_prototypes(end+1,:) = a_prototype;
         b_prototypes(end+1,:) = b_prototype;
 
-        j = j + 1;
-
         % If no class A points were classified as B, then remove all points
         % correctly classified as B from the dataset
         if naB(end) == 0
@@ -50,7 +48,7 @@ function [naB, nbA, a_prototypes, b_prototypes] = find_sequential_classifiers(cl
                     if class_b_data(i,:) == correct_b(k,:)
                         class_b_data(i,:) = [];
                     else
-                        i = i + 1 ;
+                        i = i + 1;
                     end
                 end
             end
@@ -66,13 +64,13 @@ function [naB, nbA, a_prototypes, b_prototypes] = find_sequential_classifiers(cl
                     if class_a_data(i,:) == correct_a(k,:)
                         class_a_data(i,:) = [];
                     else
-                        i = i + 1 ;
+                        i = i + 1;
                     end
                 end
             end
         end
         
-        % If we're not placing a limit on our classifiers, and have reached
+        % If we're placing a limit on our classifiers, and have reached
         % our max classifiers number, break
         if (max_j ~= -1 && j == max_j)
             break;
@@ -82,5 +80,7 @@ function [naB, nbA, a_prototypes, b_prototypes] = find_sequential_classifiers(cl
         if (isempty(class_a_data) || isempty(class_b_data))
             break;
         end
+
+        j = j + 1;
     end
 end
