@@ -99,7 +99,7 @@ legend('ML Decision Boundary', 'Class A Data', 'Class B Data', 'Class C Data');
 load('lab2_3.mat');
 
 % Compute discriminant functions, naB, nBa
-[naB, nbA, a_prots, b_prots] = find_sequential_classifiers(a,b,3);
+[naB, nbA, a_prots, b_prots] = find_sequential_classifiers(a,b,-1);
 
 
 % Mesh grid
@@ -148,3 +148,19 @@ scatter(b(:,1), b(:,2), color='blue')
 legend('Sequential Classifier Decision Boundary', 'Class A Data', 'Class B Data');
 xlabel('x');
 ylabel('y');
+
+% Plot error rates as function of J
+[avg_err, min_err, max_err, std_dev_err] = sequential_discriminant_error(a, b, 5, 20);
+figure(4)
+subplot(4,1,1);
+plot(1:5, avg_err, 'o-','linewidth',3,'markersize',7,'markerfacecolor','blue', 'MarkerEdgeColor','blue');
+title('Average Error Rate');
+subplot(4,1,2);
+plot(1:5, min_err, 'o-','linewidth',3,'markersize',7,'markerfacecolor','blue', 'MarkerEdgeColor','blue');
+title('Minimum Error Rate');
+subplot(4,1,3);
+plot(1:5, max_err, 'o-','linewidth',3,'markersize',7,'markerfacecolor','blue', 'MarkerEdgeColor','blue');
+title('Maximum Error Rate');
+subplot(4,1,4);
+plot(1:5, std_dev_err, 'o-','linewidth',3,'markersize',7,'markerfacecolor','blue', 'MarkerEdgeColor','blue');
+title('Standard Deviation of Error Rates');
