@@ -27,6 +27,7 @@ hold on;
 plot(x, uniform_dist_a);
 plot(x, normal_dist_a);
 scatter(a, y);
+legend("Estimation", "Dataset A")
 saveas(gcf, "figures/1D_uniform_A.png")
 hold off;
 
@@ -51,6 +52,7 @@ hold on;
 plot(x, uniform_dist_b);
 plot(x, exp_dist_b);
 scatter(b, y);
+legend("Estimation", "Dataset B")
 saveas(gcf, "figures/1D_uniform_B.png")
 hold off;
 
@@ -73,6 +75,7 @@ hold on;
 plot(x, non_param_a_1);
 plot(x, normal_dist_a);
 scatter(a, y);
+legend("Estimation", "Dataset A")
 saveas(gcf, "figures/1D_non_parametric_0_1_A.png")
 hold off;
 
@@ -82,6 +85,7 @@ hold on;
 plot(x, non_param_a_2);
 plot(x, normal_dist_a);
 scatter(a, y);
+legend("Estimation", "Dataset A")
 saveas(gcf, "figures/1D_non_parametric_0_4_A.png")
 hold off;
 
@@ -104,6 +108,7 @@ title("1D Non-Parametric Estimation - Dataset B STD 0.1")
 plot(x, non_param_b_1);
 plot(x, exp_dist_b);
 scatter(b, y);
+legend("Estimation", "Dataset B")
 saveas(gcf, "figures/1D_non_parametric_0_1_B.png")
 hold off;
 
@@ -113,6 +118,7 @@ title("1D Non-Parametric Estimation - Dataset B STD 0.4")
 plot(x, non_param_b_2);
 plot(x, exp_dist_b);
 scatter(b, y);
+legend("Estimation", "Dataset B")
 saveas(gcf, "figures/1D_non_parametric_0_4_B.png")
 hold off;
 
@@ -141,6 +147,7 @@ hold on;
 plot(x, gaussian_dist_a);
 plot(x, normal_dist_a);
 scatter(a, y);
+legend("Estimation", "Dataset A")
 saveas(gcf, "figures/1D_gaussian_A.png")
 hold off;
 
@@ -151,6 +158,7 @@ hold on;
 plot(x, exponential_dist_a);
 plot(x, normal_dist_a);
 scatter(a, y);
+legend("Estimation", "Dataset A")
 saveas(gcf, "figures/1D_exponential_A.png")
 hold off;
 
@@ -180,6 +188,7 @@ hold on;
 plot(x, gaussian_dist_b);
 plot(x, exp_dist_b);
 scatter(b, y);
+legend("Estimation", "Dataset B")
 saveas(gcf, "figures/1D_gaussian_B.png")
 hold off;
 
@@ -190,6 +199,7 @@ hold on;
 title("1D Parametric Estimation Exponential - Dataset B")
 plot(x, exponential_dist_b);
 plot(x, exp_dist_b);
+legend("Estimation", "Dataset B")
 scatter(b, y);
 saveas(gcf, "figures/1D_exponential_B.png")
 hold off;
