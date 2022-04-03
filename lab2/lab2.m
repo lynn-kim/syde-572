@@ -57,26 +57,26 @@ xlabel('x');
 ylabel('y');
 
 % NON-PARAMETRIC ESTIMATION
-h = 1;
-x1 = x_min-1:h:x_max+1;
-y1 = y_min-1:h:y_max+1;
+resolution = 1;
+x1 = x_min-1:resolution:x_max+1;
+y1 = y_min-1:resolution:y_max+1;
 [X1, Y1] = meshgrid(x1, y1);
 abc_non_parametric = zeros(size(X1,1), size(Y1,2));
 
-res = [h x_min y_min x_max y_max]; % From the parzen file
+res = [resolution x_min y_min x_max y_max]; % From the parzen file
 
 % Setting up for Parzen
 %%% win = window
 %%% The window function in lab 2 is a Gaussian Window function, with
 %%% variance of 400
-window = gaussian_window(400);
+window = gaussian_window(400, resolution);
 
 [p_al, x_al, y_al] = parzen(al, res, window);
 [p_bl, x_bl, y_bl] = parzen(bl, res, window);
 [p_cl, x_cl, y_cl] = parzen(cl, res, window);
 
-for i = 1:size(X1, 1) -1
-    for j = 1:size(Y1, 2)-1
+for i = 1:size(p_al, 1)
+    for j = 1:size(p_al, 2)
         val1 = p_al(i,j);
         val2 = p_bl(i,j);
         val3 = p_cl(i,j);
@@ -84,6 +84,7 @@ for i = 1:size(X1, 1) -1
         abc_non_parametric(i,j) = class;
     end
 end
+
 
 figure(2)
 % Plot ML contour for classes a,b,c
