@@ -28,6 +28,8 @@ plot(x, uniform_dist_a);
 plot(x, normal_dist_a);
 scatter(a, y);
 legend("Estimation", "Dataset A")
+xlabel("x")
+ylabel("P(x)")
 saveas(gcf, "figures/1D_uniform_A.png")
 hold off;
 
@@ -53,6 +55,8 @@ plot(x, uniform_dist_b);
 plot(x, exp_dist_b);
 scatter(b, y);
 legend("Estimation", "Dataset B")
+xlabel("x")
+ylabel("P(x)")
 saveas(gcf, "figures/1D_uniform_B.png")
 hold off;
 
@@ -76,6 +80,8 @@ plot(x, non_param_a_1);
 plot(x, normal_dist_a);
 scatter(a, y);
 legend("Estimation", "Dataset A")
+xlabel("x")
+ylabel("P(x)")
 saveas(gcf, "figures/1D_non_parametric_0_1_A.png")
 hold off;
 
@@ -86,6 +92,8 @@ plot(x, non_param_a_2);
 plot(x, normal_dist_a);
 scatter(a, y);
 legend("Estimation", "Dataset A")
+xlabel("x")
+ylabel("P(x)")
 saveas(gcf, "figures/1D_non_parametric_0_4_A.png")
 hold off;
 
@@ -109,6 +117,8 @@ plot(x, non_param_b_1);
 plot(x, exp_dist_b);
 scatter(b, y);
 legend("Estimation", "Dataset B")
+xlabel("x")
+ylabel("P(x)")
 saveas(gcf, "figures/1D_non_parametric_0_1_B.png")
 hold off;
 
@@ -119,6 +129,8 @@ plot(x, non_param_b_2);
 plot(x, exp_dist_b);
 scatter(b, y);
 legend("Estimation", "Dataset B")
+xlabel("x")
+ylabel("P(x)")
 saveas(gcf, "figures/1D_non_parametric_0_4_B.png")
 hold off;
 
@@ -148,6 +160,8 @@ plot(x, gaussian_dist_a);
 plot(x, normal_dist_a);
 scatter(a, y);
 legend("Estimation", "Dataset A")
+xlabel("x")
+ylabel("P(x)")
 saveas(gcf, "figures/1D_gaussian_A.png")
 hold off;
 
@@ -159,6 +173,8 @@ plot(x, exponential_dist_a);
 plot(x, normal_dist_a);
 scatter(a, y);
 legend("Estimation", "Dataset A")
+xlabel("x")
+ylabel("P(x)")
 saveas(gcf, "figures/1D_exponential_A.png")
 hold off;
 
@@ -189,6 +205,8 @@ plot(x, gaussian_dist_b);
 plot(x, exp_dist_b);
 scatter(b, y);
 legend("Estimation", "Dataset B")
+xlabel("x")
+ylabel("P(x)")
 saveas(gcf, "figures/1D_gaussian_B.png")
 hold off;
 
@@ -201,6 +219,8 @@ plot(x, exponential_dist_b);
 plot(x, exp_dist_b);
 legend("Estimation", "Dataset B")
 scatter(b, y);
+xlabel("x")
+ylabel("P(x)")
 saveas(gcf, "figures/1D_exponential_B.png")
 hold off;
 
